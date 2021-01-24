@@ -98,7 +98,7 @@ VALUES (iStudentID,iFrenchSubjectID),
 
 END$$;
 SELECT * FROM StudentSubjects;
-
+--TODO: Lorna do not forget to populate the student class table for the rest of the data
 --CleanUp
 /*
 	DROP TABLE StudentSubjects;
