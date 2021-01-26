@@ -138,7 +138,8 @@ WHERE FirstName = 'Jacob'
 AND LastName = 'Kennedy';
 	
 INSERT INTO StudentSubjects (StudentID, SubjectID)
-VALUES (iStudentID, iMathSubjectID);
+VALUES (iStudentID, iMathSubjectID), 
+	(iStudentID, iFrenchSubjectID);
 
 END$$;
 --Subject Name and students name
@@ -149,7 +150,39 @@ FROM StudentSubjects AS SS
 	ON S.StudentID = SS.StudentID
 	INNER JOIN
 	Subjects AS SJ
-	ON SS.SubjectID = SJ.SubjectID;
+	ON SS.SubjectID = SJ.SubjectID ;
+--3.Build a query that reports on the classes the Kennedy kids are taking 
+SELECT S.LastName, SJ.SubjectName
+FROM StudentSubjects AS SS
+	INNER JOIN 
+	Students AS S 
+	ON S.StudentID = SS.StudentID
+	INNER JOIN
+	Subjects AS SJ
+	ON SS.SubjectID = SJ.SubjectID 
+WHERE LastName = 'Kennedy';
+
+--4.Build a query that reports on the most popular class
+SELECT DISTINCT S.FirstName, SJ.SubjectName
+FROM StudentSubjects AS SS
+	INNER JOIN 
+	Students AS S 
+	ON S.StudentID = SS.StudentID
+	INNER JOIN
+	Subjects AS SJ
+	ON SS.SubjectID = SJ.SubjectID ;
+--I'M STUCK ON QUESTION 4
+/*WHERE MAX(SubjectName = 'French' )
+OR MAX(SubjectName = 'Physics')
+OR MAX(SubjectName = 'Mathematics')
+GROUP BY S.FirstName ; */
+
+
+	
+
+
+
+
 
 --TODO: Lorna do not forget to populate the student class table for the rest of the data
 --CleanUp
