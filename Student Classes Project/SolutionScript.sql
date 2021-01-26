@@ -15,6 +15,8 @@ Questions:
 3.	Build a query that reports on the classes the Kennedy kids are taking 
 4.	Build a query that reports on the most popular class
 */
+--MAX for each subject and see which one comes the highest 
+
 DO $$DECLARE 
 iStudentID INT;
 iMathSubjectID INT;
@@ -50,7 +52,7 @@ INSERT INTO Subjects (SubjectName)
 VALUES('French'),
 	('Mathematics'),
 	('Physics');
-
+--SELECT * FROM Subjects
 --Setting SubjectID Variables
 SELECT S.SubjectID  
 INTO iMathSubjectID 
@@ -91,13 +93,63 @@ WHERE S.FirstName= 'Jim' AND
 
 INSERT INTO StudentSubjects (StudentID,
 	SubjectID)
-VALUES (iStudentID,iFrenchSubjectID),
-	(iStudentID,iPhysicsSubjectID);
+VALUES (iStudentID, iFrenchSubjectID),
+	(iStudentID, iPhysicsSubjectID);
+	
+--Alex Xaviera (Mathematics, French and Physics)
+SELECT S.StudentID 
+INTO iStudentID
+FROM Students AS S
+WHERE FirstName = 'Alex'
+AND LastName = 'Xaviera';
 
+INSERT INTO StudentSubjects (StudentID, SubjectID)
+VALUES (iStudentID, iMathSubjectID),
+	(iStudentID, iFrenchSubjectID),
+	(iStudentID, iPhysicsSubjectID);
 
+--James Jackson (Physics,French)
+SELECT S.StudentID
+INTO iStudentID
+FROM Students AS S
+WHERE FirstName = 'James'
+AND LastName = 'Jackson';
 
+INSERT INTO StudentSubjects (StudentID, SubjectID)
+VALUES (iStudentID, iFrenchSubjectID),
+	(iStudentID, iPhysicsSubjectID);
+
+--SELECT * FROM StudentSubjects
+--John Kennedy (Mathematics)
+SELECT StudentID 
+INTO iStudentID
+FROM Students AS S 
+WHERE FirstName = 'John'
+AND LastName = 'Kennedy';
+	
+INSERT INTO StudentSubjects (StudentID, SubjectID)
+VALUES (iStudentID, iMathSubjectID);
+
+--Jacob Kennedy (Mathematics and French)
+SELECT StudentID 
+INTO iStudentID
+FROM Students AS S 
+WHERE FirstName = 'Jacob'
+AND LastName = 'Kennedy';
+	
+INSERT INTO StudentSubjects (StudentID, SubjectID)
+VALUES (iStudentID, iMathSubjectID);
+
+--STUDENTS NAME AND SUBJECTS THEY TAKE
+SELECT *
+FROM Students
+INNER JOIN Subjects
+On Subjects.SubjectName = Students.SubjectName ; 
+
+	
+	
 END$$;
-SELECT * FROM StudentSubjects;
+
 --TODO: Lorna do not forget to populate the student class table for the rest of the data
 --CleanUp
 /*
