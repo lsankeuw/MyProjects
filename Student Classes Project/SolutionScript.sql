@@ -140,15 +140,16 @@ AND LastName = 'Kennedy';
 INSERT INTO StudentSubjects (StudentID, SubjectID)
 VALUES (iStudentID, iMathSubjectID);
 
---STUDENTS NAME AND SUBJECTS THEY TAKE
-SELECT *
-FROM Students
-INNER JOIN Subjects
-On Subjects.SubjectName = Students.SubjectName ; 
-
-	
-	
 END$$;
+--Subject Name and students name
+SELECT S.FirstName, S.LastName, SJ.SubjectName
+FROM StudentSubjects AS SS
+	INNER JOIN 
+	Students AS S 
+	ON S.StudentID = SS.StudentID
+	INNER JOIN
+	Subjects AS SJ
+	ON SS.SubjectID = SJ.SubjectID;
 
 --TODO: Lorna do not forget to populate the student class table for the rest of the data
 --CleanUp
@@ -157,4 +158,3 @@ END$$;
 	DROP TABLE students;
 	DROP TABLE Subjects;
 */
-
