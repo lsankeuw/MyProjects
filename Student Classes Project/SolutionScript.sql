@@ -163,15 +163,20 @@ FROM StudentSubjects AS SS
 WHERE LastName = 'Kennedy';
 
 --4.Build a query that reports on the most popular class
-SELECT DISTINCT S.FirstName, SJ.SubjectName
+SELECT S.SubjectName, COUNT (SS.StudentID) AS StudentCount, SS.SubjectID
 FROM StudentSubjects AS SS
 	INNER JOIN 
-	Students AS S 
-	ON S.StudentID = SS.StudentID
-	INNER JOIN
-	Subjects AS SJ
-	ON SS.SubjectID = SJ.SubjectID ;
---I'M STUCK ON QUESTION 4
+	Subjects AS S
+		ON SS.SubjectID = S.SubjectID 
+GROUP BY SS.SubjectID, S.SubjectName
+HAVING COUNT (SS.StudentID) =
+(SELECT MAX (StudentsNumber.StudentCount) AS CountMax
+FROM (SELECT COUNT (SS.StudentID) AS StudentCount, SS.SubjectID
+FROM StudentSubjects AS SS
+GROUP BY SS.SubjectID ) AS StudentsNumber
+) 
+
+
 /*WHERE MAX(SubjectName = 'French' )
 OR MAX(SubjectName = 'Physics')
 OR MAX(SubjectName = 'Mathematics')
